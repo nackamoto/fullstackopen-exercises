@@ -1,5 +1,5 @@
 # fullstackopen-exercises
-A repository containing exercises from fullstackopen
+My solutions to fullstackopen exercises
 
 #### University information
 - https://studies.cs.helsinki.fi/stats/
