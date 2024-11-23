@@ -2,8 +2,9 @@
 sequenceDiagram
 participant browser
 participant server
-
-
+    Note right of browser: The browser makes a POST request with new notes content: { note: "hello friend"}
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/notes/new
+    activate server
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa
     Note right of server: The server responds with the html
     activate server
@@ -26,4 +27,6 @@ participant server
     activate server
     server-->>browser: fetches the JSON file
     deactivate server
+    Note right of browser: The browser executes the callback function that renders the notes
+
 ```
