@@ -37,6 +37,6 @@ participant server
 
     browser->>server: GET https://studies.cs.helsinki.fi/favicon.ico
     activate server
-    server-->>browser: the HTML file
+    server-->>browser: fetches the favicon
     deactivate server
 ```
