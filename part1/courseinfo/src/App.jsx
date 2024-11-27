@@ -33,17 +33,12 @@ function Header({ course }) {
   return <h1>{course.name}</h1>;
 }
 function Content({ parts }) {
-  const part1 = parts[0].name;
-  const part2 = parts[1].name;
-  const part3 = parts[2].name;
-
-  const exercises1 = parts[0].exercises;
-  const exercises2 = parts[1].exercises;
-  const exercises3 = parts[2].exercises;
-
   return (
     <Fragment>
-      <p>
+      <Part part={parts[0]} />
+      <Part part={parts[1]} />
+      <Part part={parts[2]} />
+      {/* <p>
         {part1} {exercises1}
       </p>
       <p>
@@ -51,7 +46,7 @@ function Content({ parts }) {
       </p>
       <p>
         {part3} {exercises3}
-      </p>
+      </p> */}
     </Fragment>
   );
 }
@@ -63,4 +58,12 @@ function Total({ parts }) {
   const sum = exercises1 + exercises2 + exercises3;
 
   return <p>Number of exercises {sum}</p>;
+}
+
+function Part({ part }) {
+  return (
+    <p>
+      {part.name} {part.exercises}
+    </p>
+  );
 }
