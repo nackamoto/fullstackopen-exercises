@@ -4,6 +4,29 @@ const App = () => {
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
+  const average = (good - bad) / (good + neutral + bad);
+  const positive = (good / (good + neutral + bad)) * 100;
+
+  function Statistics({ name, count }) {
+    if (count < 1) {
+      return null;
+    }
+    return (
+      <>
+        <p>
+          {name} {count}
+        </p>
+      </>
+    );
+  }
+
+  function NoFeedback() {
+    if (good === 0 && neutral === 0 && bad === 0) {
+      return <p>No feedback given</p>;
+    }
+    return null;
+  }
+
   return (
     <>
       <h1>give feedback</h1>
@@ -17,26 +40,11 @@ const App = () => {
       <Statistics name="neutral" count={neutral} />
       <Statistics name="bad" count={bad} />
       <Statistics name="all" count={good + neutral + bad} />
-      <Statistics
-        name="average"
-        count={(good - bad) / (good + neutral + bad)}
-      />
-      <Statistics
-        name="positive"
-        count={(good / (good + neutral + bad)) * 100 + "%"}
-      />
+      <Statistics name="average" count={average ? average : 0} />
+      <Statistics name="positive" count={positive ? `${positive}%` : 0} />
+      <NoFeedback />
     </>
   );
 };
 
 export default App;
-
-function Statistics({ name, count }) {
-  return (
-    <>
-      <p>
-        {name} {count}
-      </p>
-    </>
-  );
-}
