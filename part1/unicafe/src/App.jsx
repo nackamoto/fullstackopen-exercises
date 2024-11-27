@@ -10,7 +10,7 @@ const App = () => {
     const all = good + neutral + bad;
 
     if (all < 1) {
-      return <p>No Feedbac</p>;
+      return <p>No Feedback</p>;
     }
     return (
       <table>
