@@ -4,27 +4,35 @@ const App = () => {
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
-  const average = (good - bad) / (good + neutral + bad);
-  const positive = (good / (good + neutral + bad)) * 100;
+  function Statistics() {
+    const average = (good - bad) / (good + neutral + bad);
+    const positive = (good / (good + neutral + bad)) * 100;
+    const all = good + neutral + bad;
 
-  function Statistics({ name, count }) {
-    if (count < 1) {
-      return null;
+    if (all < 1) {
+      return <p>No Feedbac</p>;
     }
     return (
-      <>
-        <p>
-          {name} {count}
-        </p>
-      </>
+      <table>
+        <tbody>
+          <StatisticLine text={`Good`} value={good} />
+          <StatisticLine text={`Neutral`} value={neutral} />
+          <StatisticLine text={`Bad`} value={bad} />
+          <StatisticLine text={`All`} value={all} />
+          <StatisticLine text={`Average`} value={average} />
+          <StatisticLine text={`Positive`} value={positive} />
+        </tbody>
+      </table>
     );
   }
 
-  function NoFeedback() {
-    if (good === 0 && neutral === 0 && bad === 0) {
-      return <p>No feedback given</p>;
-    }
-    return null;
+  function StatisticLine({ text, value }) {
+    return (
+      <tr>
+        <td>{text}</td>
+        <td>{value}</td>
+      </tr>
+    );
   }
 
   return (
@@ -36,13 +44,7 @@ const App = () => {
       </button>
       <button onClick={() => setBad((bad) => bad + 1)}>bad</button>
       <h1>statistics</h1>
-      <Statistics name="good" count={good} />
-      <Statistics name="neutral" count={neutral} />
-      <Statistics name="bad" count={bad} />
-      <Statistics name="all" count={good + neutral + bad} />
-      <Statistics name="average" count={average ? average : 0} />
-      <Statistics name="positive" count={positive ? `${positive}%` : 0} />
-      <NoFeedback />
+      <Statistics />
     </>
   );
 };
